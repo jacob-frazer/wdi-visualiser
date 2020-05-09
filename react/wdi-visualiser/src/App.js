@@ -22,7 +22,12 @@ class App extends Component {
   handleClick () {
     axios.post('http://localhost:4000/mlSubmit', this.state.ml_params)
     .then( (response) => {
-      console.log(response);
+      console.log("Updating state to reflect the model we just received");
+      this.setState({
+        "model_received": true,
+        "model_details": response.data
+      })
+      console.log(this.state)
     }, (error) => {
       console.log(error);
     });
@@ -42,6 +47,7 @@ class App extends Component {
             {this.state.ml_params.ml_type}
           </p>
           <button className='button' onClick={this.handleClick.bind(this)}>Generate Machine Learning Model!</button>
+
         </header>
       </div>
     );
