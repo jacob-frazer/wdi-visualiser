@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import json
+import sys
 
 # import all the various implementations of ML 
 import ml_types.linear_regression as linear_regression
@@ -32,18 +33,9 @@ data_df = pd.read_csv(data_path, header=0)
 
 Take this and pass it into sklearn model 
 '''
-
-# simple example of linear regression of 'adjusted net national income' by factors - Adjusted savings: education expenditure (% of GNI), "Adolescents out of school (% of lower secondary school age)"
-test_data = '''{ 
-    "ml_type": "lin_regression", 
-    "dep_var": "NY.ADJ.NNTY.CD", 
-    "indep_vars": ["NY.ADJ.AEDU.GN.ZS", "SE.SEC.UNER.LO.ZS"],
-    "countries": ["ARB", "UKR", "USA", "GBR", "BGR", "SPA", "NOR", "FRO", "MEX"],
-    "start_year": 1990,
-    "end_year": 2019
-    }'''
-
-ml_input = json.loads(test_data)
+# simple example of linear regression of 'adjusted net national income' by factors:
+# Adjusted savings: education expenditure (% of GNI), "Adolescents out of school (% of lower secondary school age)"
+ml_input = json.loads(sys.argv[1])
 
 # filter data to the relevant years:
 yrs = [str(i) for i in range(int(ml_input["start_year"]),int(ml_input["end_year"]))]
@@ -74,3 +66,8 @@ ML_FUNCS_SWITCH = {
 results = ML_FUNCS_SWITCH[ml_input["ml_type"]](ml_input, df)
 
 # process results then send back to main.py/node backend
+
+# send back to node - via json
+results = json.dumps(results)
+print(results)
+sys.stdout.flush()

@@ -1,0 +1,14 @@
+{
+  "name": "wdi_visualiser",
+  "version": "1.0.0",
+  "description": "Tool for visualising the World Development Index dataset and building ML models from it more easily",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
