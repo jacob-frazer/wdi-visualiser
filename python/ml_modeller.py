@@ -38,8 +38,8 @@ test_data = '''{
     "ml_type": "lin_regression", 
     "dep_var": "NY.ADJ.NNTY.CD", 
     "indep_vars": ["NY.ADJ.AEDU.GN.ZS", "SE.SEC.UNER.LO.ZS"],
-    "countries": ["ARB", "UKR", "USA", "GBR"],
-    "start_year": 1960,
+    "countries": ["ARB", "UKR", "USA", "GBR", "BGR", "SPA", "NOR", "FRO", "MEX"],
+    "start_year": 1990,
     "end_year": 2019
     }'''
 
