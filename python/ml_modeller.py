@@ -73,3 +73,4 @@ ML_FUNCS_SWITCH = {
 # run the machine learning model with the passed in input - val returned an object of the confusion matrix/info about regression etc
 results = ML_FUNCS_SWITCH[ml_input["ml_type"]](ml_input, df)
 
+# process results then send back to main.py/node backend
