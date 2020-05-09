@@ -19,6 +19,7 @@ data_path = r"C:\Programming\ml_data\world_development\WDIData.csv"
 data_df = pd.read_csv(data_path, header=0)
 
 # set up socket communication with node - set this up in a main.py so I can also explore the data in non ML ways
+
 ''' in here communicate with the nodejs backend - when it receives json over the communication it will be in format:
 {
     ml_type: rf_regression/lin_regression/nn_categorisation      etc - the type of analysis they want done
