@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 
+import { Multiselect } from 'multiselect-react-dropdown';
+
 class DepVarSelector extends Component {
 
     state = {}
@@ -7,33 +9,29 @@ class DepVarSelector extends Component {
     submitChoice = () => {
         // runs the function from above that we passed in - so the give the choice of param back to app to update selected
         // model parameters
-        this.props.submit("dep_var", this.state.dep_var_code)
+        console.log(this.state)
+        this.props.submit("dep_var", this.state.dep_vars_code)
     }
 
-    handleChange(event) {
-        // lookup code from name
+    updateSelection(selectedItem) {
         this.setState({
-            "dep_var_name": event.target.value,
-            "dep_var_code": this.props.indicators[event.target.value]
-        });
-    }
-
-    createSelectOptions() {
-        return Object.keys(this.props.indicators).map( (c) => {
-            return <option key={c} value={c}>{c}</option>;
-        })
+            "dep_vars_name": selectedItem, 
+            "dep_vars_code": this.props.indicators[selectedItem] 
+        }, this.submitChoice)   
     }
 
     render() {    
         return (
         <div id='main-area'>
             <div className="header">Select the <i>dependant</i> variable for the ML model.</div>
-
-            <select name="depVarSelector" size="10" value={this.state.dep_var_name} onChange={this.handleChange.bind(this)}>
-                {this.createSelectOptions()}
-            </select>
-
-            <button className="button" type="submit" value="play" onClick={this.submitChoice}>Submit!</button>
+            <Multiselect
+            options={Object.keys(this.props.indicators)}
+            onSelect={this.updateSelection.bind(this)}
+            onRemove={this.updateSelection.bind(this)}
+            isObject={false}
+            placeholder="Search Variables..."
+            selectionLimit={1}
+            />
         </div>
         );
     }

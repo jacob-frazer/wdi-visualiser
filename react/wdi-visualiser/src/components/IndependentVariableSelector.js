@@ -1,41 +1,42 @@
 import React, {Component} from 'react'
 
+import { Multiselect } from 'multiselect-react-dropdown';
+
 class IndepVarSelector extends Component {
 
-    state = {}
-
-    //TODO: Implement this.
+    state = {"indep_vars": []}
 
     submitChoice = () => {
-        // runs the function from above that we passed in - so the give the choice of param back to app to update selected
-        // model parameters
         this.props.submit("indep_vars", this.state.indep_vars)
     }
 
-    handleChange(event) {
-        // lookup code from name
-        this.setState({
-            "dep_var_name": event.target.value,
-            "dep_var_code": this.props.indicators[event.target.value]
-        });
+    onSelect(selectedList, selectedItem) {
+        let newlist = selectedList.map( item => {
+            return this.props.indicators[item]
+        })
+        this.setState({"indep_vars": newlist}, this.submitChoice)   
     }
 
-    createSelectOptions() {
-        return Object.keys(this.props.indicators).map( (c) => {
-            return <option key={c} value={c}>{c}</option>;
+    onRemove(selectedList, selectedItem) {
+        let newlist = selectedList.map( item => {
+            return this.props.indicators[item]
         })
+        this.setState({"indep_vars": newlist}, this.submitChoice)
     }
 
     render() {    
         return (
         <div id='main-area'>
-            <div className="header">Select the <i>dependant</i> variable for the ML model.</div>
+            <div className="header">Select the independant variables for the ML model.</div>
 
-            <select name="depVarSelector" size="10" value={this.state.dep_var_name} onChange={this.handleChange.bind(this)}>
-                {this.createSelectOptions()}
-            </select>
+            <Multiselect
+            options={Object.keys(this.props.indicators)}
+            onSelect={this.onSelect.bind(this)}
+            onRemove={this.onRemove.bind(this)}
+            isObject={false}
+            placeholder="Search Variables..."
+            />
 
-            <button className="button" type="submit" value="play" onClick={this.submitChoice}>Submit!</button>
         </div>
         );
     }

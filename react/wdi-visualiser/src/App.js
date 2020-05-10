@@ -5,6 +5,7 @@ import './App.css';
 import axios from 'axios'
 
 import DependentVariableSelector from './components/DependentVariableSelector'
+import IndependentVariableSelector from './components/IndependentVariableSelector'
 
 class App extends Component {
 
@@ -84,7 +85,8 @@ class App extends Component {
               </p>
     
               <DependentVariableSelector indicators={this.state.indicators} submit={this.updateMLParams}/>
-    
+              <br/>
+              <IndependentVariableSelector indicators={this.state.indicators} submit={this.updateMLParams}/>
               <br/>
               <p>When you're happy with your variable selections click the button below:</p>
               <br/>
