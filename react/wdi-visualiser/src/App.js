@@ -4,6 +4,7 @@ import './App.css';
 
 import axios from 'axios'
 
+import MachineLearningTypeSelector from './components/MachineLearningTypeSelector'
 import DependentVariableSelector from './components/DependentVariableSelector'
 import IndependentVariableSelector from './components/IndependentVariableSelector'
 import YearSelector from './components/YearSelector'
@@ -79,13 +80,13 @@ class App extends Component {
             {this.state.mappings_received ?
 
             <div>
-              <p>
+              <div className="heightened-div-1">
               The current model that will be built is: 
               <br/>
-              {this.state.ml_types[this.state.ml_params.ml_type]}
-              </p>
+              <MachineLearningTypeSelector ml_types={this.state.ml_types} submit={this.updateMLParams}/>
+              </div>
     
-              <div className="heightened-div">
+              <div className="heightened-div-2">
               <DependentVariableSelector indicators={this.state.indicators} submit={this.updateMLParams}/>
               </div>
               <IndependentVariableSelector indicators={this.state.indicators} submit={this.updateMLParams}/>

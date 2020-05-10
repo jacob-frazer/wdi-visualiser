@@ -38,7 +38,12 @@
   z-index: 3;
 }
 
-.heightened-div {
+.heightened-div-1 {
+  position: relative;
+  z-index: 5;
+}
+
+.heightened-div-2 {
   position: relative;
   z-index: 4;
 }
@@ -71,4 +76,8 @@
   justify-content: left;
   text-align: left;
   padding: 20pt;
+}
+
+.searchBox {
+  color: #000;
 }
