@@ -6,6 +6,7 @@ import axios from 'axios'
 
 import DependentVariableSelector from './components/DependentVariableSelector'
 import IndependentVariableSelector from './components/IndependentVariableSelector'
+import YearSelector from './components/YearSelector'
 
 class App extends Component {
 
@@ -85,8 +86,8 @@ class App extends Component {
               </p>
     
               <DependentVariableSelector indicators={this.state.indicators} submit={this.updateMLParams}/>
-              <br/>
               <IndependentVariableSelector indicators={this.state.indicators} submit={this.updateMLParams}/>
+              <YearSelector submit={this.updateMLParams}/>
               <br/>
               <p>When you're happy with your variable selections click the button below:</p>
               <br/>
@@ -94,7 +95,7 @@ class App extends Component {
             </div> 
             :
             // this is what the page will show whilst the mappings are being loaded
-              <p>Please wait whilst the mappings load... </p>
+              <p>Please wait whilst the data loads... </p>
             }
 
         </header>

@@ -22,7 +22,7 @@
 }
 
 .Background {
-  background-color: #4b617e;
+  background-color: #4b617e9f;
   height: 100vh;
   min-width: 100%;
   min-height: 100%;
@@ -35,4 +35,5 @@
   font-size: 12px;
   width: 80%;
   margin: auto;
+  z-index: 10;
 }
