@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from './images/world_bank.png';
 import './App.css';
 
 import axios from 'axios'
+
+import DependentVariableSelector from './components/dependentVariableSelector'
 
 class App extends Component {
 
@@ -16,8 +18,26 @@ class App extends Component {
       "start_year": 1990,
       "end_year": 2019 
     },
-    name: "Jake"
+    name: "Jake",
+    mappings_received: false
   };
+
+  // get the data on the countries/variables/yrs etc
+  componentDidMount() {
+    this.fetchMappings();
+  }
+
+  fetchMappings() {
+    axios.get('http://localhost:4000/mappings')
+    .then( (response) => {
+      this.setState({
+        "countries": response.data.countries,
+        "indicators": response.data.indicators,
+        "ml_types": response.data.mlTypes,
+        "mappings_received": true
+      })
+    })
+  }
 
   handleClick () {
     axios.post('http://localhost:4000/mlSubmit', this.state.ml_params)
@@ -33,24 +53,51 @@ class App extends Component {
     });
   }
 
+  updateMLParams = (target, value) => {
+    // function to update the ML params in the state here
+    this.setState({
+      ml_params: {...this.state.ml_params, [target]: value}
+    })
+  }
+
   render() {
+    // runs if the mappings haven't been loaded in yet
     return (
       <div className="App">
+        <div className="Background">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <img src={logo} className="wb-logo" alt="logo" />
           <p>
-            Welcome to ML builder of the World Development Index dataset
-          </p>
-          <p>
-            The current request that will be built is: 
+            Hi {this.state.name}!
             <br/>
-            {this.state.ml_params.ml_type}
+            Welcome to ML builder of the World Development Index dataset
+            <br/>
           </p>
-          <button className='button' onClick={this.handleClick.bind(this)}>Generate Machine Learning Model!</button>
+
+            {this.state.mappings_received ?
+
+            <div>
+              <p>
+              The current request that will be built is: 
+              <br/>
+              {this.state.ml_types[this.state.ml_params.ml_type]}
+              </p>
+    
+              <DependentVariableSelector indicators={this.state.indicators} submit={this.updateMLParams}/>
+    
+              <br/>
+              <p>When you're happy with your variable selections click the button below:</p>
+              <br/>
+              <button className='button' onClick={this.handleClick.bind(this)}>Generate Machine Learning Model!</button>
+            </div> 
+            :
+              <p>Please wait whilst the mappings load... </p>
+            }
 
         </header>
+        </div>
       </div>
-    );
+    )
   }
 }
 
