@@ -4,7 +4,7 @@ import './App.css';
 
 import axios from 'axios'
 
-import DependentVariableSelector from './components/dependentVariableSelector'
+import DependentVariableSelector from './components/DependentVariableSelector'
 
 class App extends Component {
 
@@ -78,7 +78,7 @@ class App extends Component {
 
             <div>
               <p>
-              The current request that will be built is: 
+              The current model that will be built is: 
               <br/>
               {this.state.ml_types[this.state.ml_params.ml_type]}
               </p>
@@ -91,6 +91,7 @@ class App extends Component {
               <button className='button' onClick={this.handleClick.bind(this)}>Generate Machine Learning Model!</button>
             </div> 
             :
+            // this is what the page will show whilst the mappings are being loaded
               <p>Please wait whilst the mappings load... </p>
             }
 

@@ -1,13 +1,15 @@
 import React, {Component} from 'react'
 
-class DepVarSelector extends Component {
+class IndepVarSelector extends Component {
 
     state = {}
+
+    //TODO: Implement this.
 
     submitChoice = () => {
         // runs the function from above that we passed in - so the give the choice of param back to app to update selected
         // model parameters
-        this.props.submit("dep_var", this.state.dep_var_code)
+        this.props.submit("indep_vars", this.state.indep_vars)
     }
 
     handleChange(event) {
@@ -37,6 +39,7 @@ class DepVarSelector extends Component {
         </div>
         );
     }
+
 }
 
-export default DepVarSelector;
+export default IndepVarSelector
