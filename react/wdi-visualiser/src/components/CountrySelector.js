@@ -6,7 +6,7 @@ class CountrySelector extends Component {
 
     updateSelection(selectedList) {
         let newlist = selectedList.map( item => {
-            return this.props.indicators[item]
+            return this.props.countries[item]
         })
         this.props.submit("countries", newlist)
     }
@@ -14,10 +14,10 @@ class CountrySelector extends Component {
     render() {    
         return (
         <div id='main-area'>
-            <div className="header">Select the independant variables</div>
+            <div className="header">Select the countries</div>
 
             <Multiselect
-            options={Object.keys(this.props.indicators)}
+            options={Object.keys(this.props.countries)}
             onSelect={this.updateSelection.bind(this)}
             onRemove={this.updateSelection.bind(this)}
             isObject={false}

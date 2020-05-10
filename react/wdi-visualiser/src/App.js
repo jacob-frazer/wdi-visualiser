@@ -7,6 +7,7 @@ import axios from 'axios'
 import MachineLearningTypeSelector from './components/MachineLearningTypeSelector'
 import DependentVariableSelector from './components/DependentVariableSelector'
 import IndependentVariableSelector from './components/IndependentVariableSelector'
+import CountrySelector from './components/CountrySelector'
 import YearSelector from './components/YearSelector'
 
 class App extends Component {
@@ -90,6 +91,7 @@ class App extends Component {
               <DependentVariableSelector indicators={this.state.indicators} submit={this.updateMLParams}/>
               </div>
               <IndependentVariableSelector indicators={this.state.indicators} submit={this.updateMLParams}/>
+              <CountrySelector countries={this.state.countries} submit={this.updateMLParams}/>
               <YearSelector submit={this.updateMLParams}/>
               <br/>
               <p>When you're happy with your variable selections click the button below:</p>
