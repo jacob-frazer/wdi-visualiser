@@ -85,13 +85,16 @@ class App extends Component {
               {this.state.ml_types[this.state.ml_params.ml_type]}
               </p>
     
+              <div className="heightened-div">
               <DependentVariableSelector indicators={this.state.indicators} submit={this.updateMLParams}/>
+              </div>
               <IndependentVariableSelector indicators={this.state.indicators} submit={this.updateMLParams}/>
               <YearSelector submit={this.updateMLParams}/>
               <br/>
               <p>When you're happy with your variable selections click the button below:</p>
+              <button className='btn-ml-submit' onClick={this.handleClick.bind(this)}>Generate Machine Learning Model!</button>
               <br/>
-              <button className='button' onClick={this.handleClick.bind(this)}>Generate Machine Learning Model!</button>
+              <div className='footer-div'>App made by Jake Frazer</div>
             </div> 
             :
             // this is what the page will show whilst the mappings are being loaded
