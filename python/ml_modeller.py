@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import json
+import sys
 
 # import all the various implementations of ML 
 import ml_types.linear_regression as linear_regression
@@ -18,6 +19,7 @@ data_path = r"C:\Programming\ml_data\world_development\WDIData.csv"
 data_df = pd.read_csv(data_path, header=0)
 
 # set up socket communication with node - set this up in a main.py so I can also explore the data in non ML ways
+
 ''' in here communicate with the nodejs backend - when it receives json over the communication it will be in format:
 {
     ml_type: rf_regression/lin_regression/nn_categorisation      etc - the type of analysis they want done
@@ -32,18 +34,9 @@ data_df = pd.read_csv(data_path, header=0)
 
 Take this and pass it into sklearn model 
 '''
-
-# simple example of linear regression of 'adjusted net national income' by factors - Adjusted savings: education expenditure (% of GNI), "Adolescents out of school (% of lower secondary school age)"
-test_data = '''{ 
-    "ml_type": "lin_regression", 
-    "dep_var": "NY.ADJ.NNTY.CD", 
-    "indep_vars": ["NY.ADJ.AEDU.GN.ZS", "SE.SEC.UNER.LO.ZS"],
-    "countries": ["ARB", "UKR", "USA", "GBR", "BGR", "SPA", "NOR", "FRO", "MEX"],
-    "start_year": 1990,
-    "end_year": 2019
-    }'''
-
-ml_input = json.loads(test_data)
+# simple example of linear regression of 'adjusted net national income' by factors:
+# Adjusted savings: education expenditure (% of GNI), "Adolescents out of school (% of lower secondary school age)"
+ml_input = json.loads(sys.argv[1])
 
 # filter data to the relevant years:
 yrs = [str(i) for i in range(int(ml_input["start_year"]),int(ml_input["end_year"]))]
@@ -73,3 +66,9 @@ ML_FUNCS_SWITCH = {
 # run the machine learning model with the passed in input - val returned an object of the confusion matrix/info about regression etc
 results = ML_FUNCS_SWITCH[ml_input["ml_type"]](ml_input, df)
 
+# process results then send back to main.py/node backend
+
+# send back to node - via json
+results = json.dumps(results)
+print(results)
+sys.stdout.flush()
