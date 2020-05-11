@@ -90,8 +90,11 @@ class App extends Component {
               <div className="heightened-div-2">
               <DependentVariableSelector indicators={this.state.indicators} submit={this.updateMLParams}/>
               </div>
+              <div className="heightened-div-3">
               <IndependentVariableSelector indicators={this.state.indicators} submit={this.updateMLParams}/>
+              </div>
               <CountrySelector countries={this.state.countries} submit={this.updateMLParams}/>
+              <br/>
               <YearSelector submit={this.updateMLParams}/>
               <br/>
               <p>When you're happy with your variable selections click the button below:</p>
