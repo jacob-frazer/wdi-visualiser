@@ -18,7 +18,7 @@ def run(ml_input, data):
 
     # predictions (write this to something and return as output?)
     predictions = lm.predict(df)
-    results["predictions"] = predictions.tolist()
+    #results["predictions"] = predictions.tolist()
     results["R Squared"] = lm.score(df, target)
 
     return results

@@ -40,7 +40,8 @@ app.post('/mlSubmit', (req, res) => {
     pythonProcess.stdout.on('data', (data) => { 
         // return the data to front end to display
         data = data.toString('utf-8')
-
+        console.log("the data is:")
+        console.log(data)
         res.send(JSON.parse(data))
     } ) 
 })

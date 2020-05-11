@@ -98,3 +98,7 @@
   justify-content: center;
   text-align: center;
 }
+
+.ml-loading {
+  display:inline-block;
+}

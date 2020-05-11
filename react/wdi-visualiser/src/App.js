@@ -10,6 +10,8 @@ import IndependentVariableSelector from './components/IndependentVariableSelecto
 import CountrySelector from './components/CountrySelector'
 import YearSelector from './components/YearSelector'
 
+import ReactLoading from 'react-loading'
+
 class App extends Component {
 
   // for now bind our example to the state
@@ -23,7 +25,8 @@ class App extends Component {
       "end_year": 2019 
     },
     name: "Jake",
-    mappings_received: false
+    mappings_received: false,
+    waiting_for_ml: false
   };
 
   // get the data on the countries/variables/yrs etc
@@ -43,13 +46,15 @@ class App extends Component {
     })
   }
 
-  handleClick () {
+  handleClick() {
+    this.setState({"waiting_for_ml":true})
     axios.post('http://localhost:4000/mlSubmit', this.state.ml_params)
     .then( (response) => {
       console.log("Updating state to reflect the model we just received");
       this.setState({
         "model_received": true,
-        "model_details": response.data
+        "model_details": response.data,
+        "waiting_for_ml": false
       })
       console.log(this.state)
     }, (error) => {
@@ -98,7 +103,11 @@ class App extends Component {
               <YearSelector submit={this.updateMLParams}/>
               <br/>
               <p>When you're happy with your variable selections click the button below:</p>
+              { this.state.waiting_for_ml ? 
+              <ReactLoading className="ml-loading" type="bubbles" height={'20%'} width={'20%'} />
+              :
               <button className='btn-ml-submit' onClick={this.handleClick.bind(this)}>Generate Machine Learning Model!</button>
+              }
               <br/>
               <div className='footer-div'>App made by Jake Frazer</div>
             </div> 
