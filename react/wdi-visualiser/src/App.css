@@ -81,7 +81,8 @@
   align-items: left;
   justify-content: left;
   text-align: left;
-  padding: 20pt;
+  padding: 40pt;
+  color: white;
 }
 
 .searchBox {

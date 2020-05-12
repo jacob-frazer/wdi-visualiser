@@ -100,8 +100,6 @@ class QueryBuilder extends Component {
               :
               <button className='btn-ml-submit' onClick={this.handleClick.bind(this)}>Generate Machine Learning Model!</button>
               }
-              <br/>
-              <div className='footer-div'>App made by Jake Frazer</div>
             </div> 
             :
             // this is what the page will show whilst the mappings are being loaded

@@ -41,16 +41,24 @@ class App extends Component {
     })
   }
 
+  resetModel = () => {
+    this.setState({
+      model_received: false
+    })
+  }
+
   render() {
     // runs if the mappings haven't been loaded in yet
     return (
       <div className="App">
         <div className="Background">
           {this.state.model_received ?
-          <ResultsVisualiser results={this.state.model_details} />
+          <ResultsVisualiser results={this.state.model_details} reset={this.resetModel}/>
           :
           <QueryBuilder mappings={this.state.mappings} updateModel={this.updateModel}/>
           }
+        <br/>
+        <div className='footer-div'>App made by Jake Frazer</div>
         </div>
       </div>
     )
