@@ -4,7 +4,7 @@ import pandas as pd
 
 def run(ml_input, data):
     # data struct that will be returned to user
-    results = {}
+    results = {"type":"lin_regression"}
 
     # do any ML technique specific data manipulation (classification break into groups for instance)
 
