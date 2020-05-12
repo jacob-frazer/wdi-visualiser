@@ -39,8 +39,12 @@ app.post('/mlSubmit', (req, res) => {
     axios.post(url, req.body)
     .then( (response) => {
         res.send(response.data)
+        // send the response data into mongodb
       })
     .catch((error) => {
+
         console.error(error)
+        console.log("We hit an error see above")
+        res.send(error)
       })
     }) 

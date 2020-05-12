@@ -7,6 +7,9 @@ class ResultsVisualiser extends Component {
     render() {    
         return (
         <div id='main-area'>
+            <div className='visualiser-header'>You have made a Linear Regression Model</div>
+            <br/>
+
             The R squared value of the model is {this.props.results["R Squared"]} .
             <br/>
         </div>

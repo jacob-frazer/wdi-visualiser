@@ -13,7 +13,7 @@ class ResultsVisualiser extends Component {
                 return <LinearRegressionVisualiser results={this.props.results}/>;
 
             default:
-                return "No ML Type supplied - Results can't be rendered";
+                return <div className="error-div">"There was an error in your ML model. Please build another."</div>;
         }
     }
 
@@ -21,10 +21,7 @@ class ResultsVisualiser extends Component {
     render() {    
         return (
         <div id='main-area'>
-            
             {this.renderSwitch(this.props.results.type)}
-            <br/>
-
             <br/>
             <button className='btn-ml-back' onClick={this.props.reset}>Take me back!</button>
         </div>

@@ -48,10 +48,13 @@ class QueryBuilder extends Component {
         "model_details": response.data,
         "waiting_for_ml": false
       })
-      console.log(this.state)
       this.props.updateModel(this.state.model_details)
     }, (error) => {
+        // TODO: set up how to handle errors
       console.log(error);
+      this.setState({
+        "waiting_for_ml": false
+      })
     });
   }
 
