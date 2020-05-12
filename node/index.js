@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 
+const axios = require('axios')
+const python_url = 'http://localhost:5000'
+
 // the mappings of countries and indicators etc
 const countries = require('./mappings/countryCodes.json')
 const indicators = require('./mappings/indicatorCodes.json')
@@ -26,22 +29,18 @@ app.get('/mappings', (req, res) => {
 })
 
 app.post('/mlSubmit', (req, res) => {
-    // Front end will post the ML details to this url - from which it will call the python ML to calculate it
-    let spawn = require("child_process").spawn;
+    // Front end will post the ML details to this url - from which it will check database/send to python
 
-    console.log("The request we received from the front end is:")
-    console.log(req.body)
+    // TODO: check params against database and return if it already exists
 
-    // put the details from the post request about the ML model req.query.firstname
-    var pythonProcess = spawn('python',["../python/ml_modeller.py", JSON.stringify(req.body)] ); 
-  
-    // Takes stdout data from script which executed 
-    // with arguments and send this data to res object 
-    pythonProcess.stdout.on('data', (data) => { 
-        // return the data to front end to display
-        data = data.toString('utf-8')
-        console.log("the data is:")
-        console.log(data)
-        res.send(JSON.parse(data))
-    } ) 
-})
+    // redirect the request to the python backend to build the model
+    let url = python_url + '/ml'
+
+    axios.post(url, req.body)
+    .then( (response) => {
+        res.send(response.data)
+      })
+    .catch((error) => {
+        console.error(error)
+      })
+    }) 
