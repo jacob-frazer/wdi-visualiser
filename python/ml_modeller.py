@@ -5,6 +5,7 @@ import sys
 
 # import all the various implementations of ML 
 import ml_types.linear_regression as linear_regression
+import ml_types.rf_classifier as rf_classifier
 
 #print("Hopefully the start of something great :) ")
 
@@ -17,23 +18,6 @@ data_path = r"C:\Programming\ml_data\world_development\WDIData.csv"
 
 # get data into pandas df
 data_df = pd.read_csv(data_path, header=0)
-
-# set up socket communication with node - set this up in a main.py so I can also explore the data in non ML ways
-
-''' in here communicate with the nodejs backend - when it receives json over the communication it will be in format:
-{
-    ml_type: rf_regression/lin_regression/nn_categorisation      etc - the type of analysis they want done
-    dep_var: xxx,
-    indep_vars: [yyy, zzz, ...],
-    ...
-    anything_else: ? -- this will be various parameters define properly later
-    countries to run on
-    years to run over
-    params for the model
-}
-
-Take this and pass it into sklearn model 
-'''
 
 def run(model_details):
     # simple example of linear regression of 'adjusted net national income' by factors:
@@ -49,9 +33,8 @@ def run(model_details):
     d = d[d["Indicator Code"].isin(mlvar)]
 
     # normally if all countries we dont need to filter
-    # TODO: Find how many countries there are if all are selected
     countries = ml_input["countries"]
-    if len(countries) != 100:
+    if len(countries) != 264:
         d = d[d["Country Code"].isin(countries)]
 
     # manipulate to be in more conventional format so 1 entry is a year and country and then has its values for the variables
@@ -62,7 +45,8 @@ def run(model_details):
     # "switch" statement to route to right function for each case of machine learning.
     # point string to the func it corresponds to
     ML_FUNCS_SWITCH = {
-        "lin_regression": linear_regression.run
+        "lin_regression": linear_regression.run,
+        "rf_classifier": rf_classifier.run
     }
 
     # run the machine learning model with the passed in input - val returned an object of the confusion matrix/info about regression etc
@@ -72,5 +56,3 @@ def run(model_details):
 
     # send back to node - via json
     return json.dumps(results)
-#print(results)
-#sys.stdout.flush()

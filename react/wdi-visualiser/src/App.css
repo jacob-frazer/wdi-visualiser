@@ -22,12 +22,13 @@
 }
 
 .Background {
+  position: fixed;
   background-color: #4b617e9f;
-  height: 100vh;
   min-width: 100%;
   min-height: 100%;
   width: 100%;
   height: 100%;
+  z-index: -2;
 }
 
 #multiselectContainerReact {

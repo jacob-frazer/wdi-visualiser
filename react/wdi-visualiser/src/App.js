@@ -51,7 +51,7 @@ class App extends Component {
     // runs if the mappings haven't been loaded in yet
     return (
       <div className="App">
-        <div className="Background">
+        <div className="Background"></div>
           {this.state.model_received ?
           <ResultsVisualiser results={this.state.model_details} reset={this.resetModel}/>
           :
@@ -59,7 +59,7 @@ class App extends Component {
           }
         <br/>
         <div className='footer-div'>App made by Jake Frazer</div>
-        </div>
+        
       </div>
     )
   }
