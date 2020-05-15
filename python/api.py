@@ -17,6 +17,8 @@ def run_ml():
     model_details = request.get_json(force=True)
     model = ml_modeller.run(model_details)
 
+    print(model)
+
     return model
 
 app.run(debug=True, port=5000)
