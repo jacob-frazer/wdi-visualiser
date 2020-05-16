@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 
-import LinearRegressionVisualiser from './LinearRegressionVisualiser'
-import RFClassifierVisualiser from './RFClassifierVisualiser'
+import LinearRegressionVisualiser from './visualisers/LinearRegressionVisualiser'
+import RFClassifierVisualiser from './visualisers/RFClassifierVisualiser'
 
 import '../css/ResultsVisualiser.css'
 

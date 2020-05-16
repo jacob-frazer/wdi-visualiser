@@ -3,11 +3,12 @@ import logo from '../images/world_bank.png';
 
 import axios from 'axios'
 
-import MachineLearningTypeSelector from './MachineLearningTypeSelector'
-import DependentVariableSelector from './DependentVariableSelector'
-import IndependentVariableSelector from './IndependentVariableSelector'
-import CountrySelector from './CountrySelector'
-import YearSelector from './YearSelector'
+import MachineLearningTypeSelector from './selectors/MachineLearningTypeSelector'
+import DependentVariableSelector from './selectors/DependentVariableSelector'
+import IndependentVariableSelector from './selectors/IndependentVariableSelector'
+import CountrySelector from './selectors/CountrySelector'
+import YearSelector from './selectors/YearSelector'
+import ModelSpecificParamSelector from './selectors/ModelSpecificParamSelector'
 
 import ReactLoading from 'react-loading'
 
@@ -16,12 +17,13 @@ class QueryBuilder extends Component {
   // for now bind our example to the state
   state = {
     ml_params: {
-      "ml_type": "lin_regression", 
+      "ml_type": "", 
       "dep_var": "NY.ADJ.NNTY.CD", 
       "indep_vars": ["NY.ADJ.AEDU.GN.ZS", "SE.SEC.UNER.LO.ZS"],
       "countries": ["ARB", "UKR", "USA", "GBR", "BGR", "SPA", "NOR", "FRO", "MEX"],
       "start_year": 1980,
-      "end_year": 2010 
+      "end_year": 2010,
+      "ml_specific": {} 
     },
     name: "Jake",
     mappings: this.props.mappings,
@@ -63,6 +65,13 @@ class QueryBuilder extends Component {
     this.setState({
       ml_params: {...this.state.ml_params, [target]: value}
     })
+
+    // if changing ml type then reset the ml specific params
+    if (target === "ml_type") {
+      this.setState({
+        ml_params: {...this.state.ml_params, "ml_specific": {}, [target]: value }
+      })
+    }
   }
 
   render() {
@@ -96,6 +105,8 @@ class QueryBuilder extends Component {
               <CountrySelector countries={this.state.mappings.countries} submit={this.updateMLParams}/>
               <br/>
               <YearSelector submit={this.updateMLParams}/>
+              <br/>
+              <ModelSpecificParamSelector type={this.state.ml_params.ml_type} submit={this.updateMLParams}/>
               <br/>
               <p>When you're happy with your variable selections click the button below:</p>
               { this.state.waiting_for_ml ? 
