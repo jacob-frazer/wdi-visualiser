@@ -5,32 +5,15 @@ import LinearRegressionVars from './ml_specific/LinearRegressionVars'
 import RFClassifierVars from './ml_specific/RFClassifierVars'
 
 class ModelSpecificSelector extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    state = {}
-
-    componentDidUpdate(prevProps){
-        if(prevProps.type !== this.props.type){
-            this.setState({          
-                type: this.props.type
-            });
-        }
-    }
-
-    updateSelection(selection) { 
-        this.props.submit("ml_specific", selection)
-    }
 
     // conditionally render based on type of ML done
     renderSwitch(ml_type) {
         switch(ml_type) {
             case 'lin_regression':
-                return <LinearRegressionVars submit={this.updateSelection}/>;
+                return <LinearRegressionVars/>;
 
             case 'rf_classifier':
-                return <RFClassifierVars submit={this.updateSelection}/>;
+                return <RFClassifierVars/>;
 
             default:
                 return <div className="error-div">No model type has been selected.</div>;
@@ -41,7 +24,7 @@ class ModelSpecificSelector extends Component {
         return (
         <div id='main-area'>
             <div className="header">Select the ML specific values</div>
-            {this.renderSwitch(this.state.type)}
+            {this.renderSwitch(this.props.type)}
             <br/>
         </div>
         );

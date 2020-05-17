@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux';
+
+// actions
+import { updateMLParams } from '../../../actions/modelActions';
 
 // component with the optional vars for random forest classifiers
 
 class RFClassifierVars extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     state = {
         num_classes: 3,
@@ -13,14 +14,13 @@ class RFClassifierVars extends Component {
     }
     
     handleChange = (event) => {
-        this.setState({[event.target.id]: event.target.value});
+        this.setState({[event.target.id]: parseInt(event.target.value)});
     }
 
     handleSubmit = (event) => {
-        //alert('A name was submitted: ' + this.state.value);
         event.preventDefault();
-        // send state up the chain to update 
-        this.props.submit(this.state)
+        // remap state to have integers not strings
+        this.props.updateMLParams("ml_specific", this.state)
     }
 
     render() {    
@@ -30,12 +30,12 @@ class RFClassifierVars extends Component {
             <form onSubmit={this.handleSubmit.bind(this)}>
                 <label>
                 Number of Classes 
-                <input id='num_classes' type="text" value={this.state.num_classes} onChange={this.handleChange.bind(this)} />        
+                <input id='num_classes' type="number" value={this.state.num_classes} onChange={this.handleChange.bind(this)} />        
                 </label>
                 <br/>
                 <label>
                 Max Tree Depth 
-                <input id='tree_depth' type="text" value={this.state.tree_depth} onChange={this.handleChange.bind(this)} />        
+                <input id='tree_depth' type="number" value={this.state.tree_depth} onChange={this.handleChange.bind(this)} />        
                 </label>
                 <br/>
                 <input type="submit" value="Submit" />
@@ -46,4 +46,16 @@ class RFClassifierVars extends Component {
     }
 }
 
-export default RFClassifierVars;
+const mapStateToProps = (state) => {
+    return {
+      blank: 1
+    }
+  }
+  
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      updateMLParams: (target, value) => dispatch(updateMLParams(target, value)),
+    }
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(RFClassifierVars);
