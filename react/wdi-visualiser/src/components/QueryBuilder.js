@@ -3,6 +3,8 @@ import logo from '../images/world_bank.png';
 
 import axios from 'axios'
 
+import { connect } from 'react-redux';
+
 import MachineLearningTypeSelector from './selectors/MachineLearningTypeSelector'
 import DependentVariableSelector from './selectors/DependentVariableSelector'
 import IndependentVariableSelector from './selectors/IndependentVariableSelector'
@@ -126,4 +128,4 @@ class QueryBuilder extends Component {
   }
 }
 
-export default QueryBuilder;
+export default connect()(QueryBuilder);

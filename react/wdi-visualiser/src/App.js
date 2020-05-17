@@ -3,8 +3,13 @@ import './App.css';
 
 import axios from 'axios';
 
+import { connect } from 'react-redux';
+
 import ResultsVisualiser from './components/ResultsVisualiser';
 import QueryBuilder from './components/QueryBuilder';
+
+// actions
+import { addMappings, waitingMappings } from './actions/mappingActions';
 
 class App extends Component {
 
@@ -21,8 +26,14 @@ class App extends Component {
   }
 
   fetchMappings() {
+    this.props.waitingMappings()
     axios.get('http://localhost:4000/mappings')
     .then( (response) => {
+      let mappings = {
+        "countries": response.data.countries,
+        "indicators": response.data.indicators,
+        "ml_types": response.data.mlTypes
+      }
       this.setState({
         mappings: {
           "countries": response.data.countries,
@@ -30,6 +41,11 @@ class App extends Component {
           "ml_types": response.data.mlTypes
         }
       })
+      // dispatch the action to update mappings into store
+      console.log("add mappings to be called:")
+      console.log(mappings)
+      this.props.addMappings(mappings)
+      console.log(this.props)
     })
   }
 
@@ -65,4 +81,18 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    mappings: state.mappings.mappings,
+    mappings_received: state.mappings.mappings_received
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addMappings: (mappings) => dispatch(addMappings(mappings)),
+    waitingMappings: () => dispatch(waitingMappings())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
