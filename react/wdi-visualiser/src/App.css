@@ -104,3 +104,15 @@
 .ml-loading {
   display:inline-block;
 }
+
+.ml-specific-div {
+  font-size: 12pt;
+}
+
+label {
+  font-size: 12pt;
+}
+
+.error-div {
+  font-size: 12pt;
+}

@@ -9,7 +9,7 @@ import { updateMLParams } from '../../../actions/modelActions';
 class RFClassifierVars extends Component {
 
     state = {
-        num_classes: 3,
+        num_trees: 15,
         tree_depth: 2
     }
     
@@ -27,14 +27,14 @@ class RFClassifierVars extends Component {
         console.log(this.props)
         return (
         <div id='ml-specific-div'>
-            <form id='ml-specific-form' onSubmit={this.handleSubmit.bind(this)}>
+            <form onSubmit={this.handleSubmit.bind(this)}>
                 <label>
-                Number of Classes &nbsp;&nbsp;&nbsp;&nbsp;
-                <input id='num_classes' type="number" value={this.state.num_classes} onChange={this.handleChange.bind(this)} />        
+                Number of Trees 
+                <input id='num_classes' type="number" value={this.state.num_trees} onChange={this.handleChange.bind(this)} />        
                 </label>
                 <br/>
                 <label>
-                Max Tree Depth &nbsp;&nbsp;&nbsp;&nbsp;
+                Max Tree Depth 
                 <input id='tree_depth' type="number" value={this.state.tree_depth} onChange={this.handleChange.bind(this)} />        
                 </label>
                 <br/>

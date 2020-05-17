@@ -7,8 +7,7 @@ class LinearRegressionVars extends Component {
     render() {    
         return (
         <div id='main-area'>
-            <div className="header">Linear Regression stuff</div>
-            <br/>
+            <div className="ml-specific-div">Linear Regression has no specific vals to specify</div>
         </div>
         );
     }

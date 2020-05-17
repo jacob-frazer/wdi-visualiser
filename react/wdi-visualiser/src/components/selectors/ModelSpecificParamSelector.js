@@ -3,6 +3,8 @@ import React, {Component} from 'react'
 // import all the model specific var selections
 import LinearRegressionVars from './ml_specific/LinearRegressionVars'
 import RFClassifierVars from './ml_specific/RFClassifierVars'
+import NNClassifierVars from './ml_specific/NNClassifierVars'
+import RFRegressionVars from './ml_specific/RFRegressionVars'
 
 class ModelSpecificSelector extends Component {
 
@@ -14,6 +16,12 @@ class ModelSpecificSelector extends Component {
 
             case 'rf_classifier':
                 return <RFClassifierVars/>;
+
+            case 'rf_regression':
+                    return <RFRegressionVars/>;
+
+            case 'nn_classifier':
+                    return <NNClassifierVars/>;
 
             default:
                 return <div className="error-div">No model type has been selected.</div>;

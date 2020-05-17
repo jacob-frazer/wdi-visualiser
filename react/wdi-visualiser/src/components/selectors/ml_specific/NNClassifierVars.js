@@ -10,7 +10,8 @@ class RFClassifierVars extends Component {
 
     state = {
         num_classes: 3,
-        tree_depth: 2
+        hidden_layers: 2,
+        nodes_hidden_layers: 5
     }
     
     handleChange = (event) => {
@@ -27,15 +28,20 @@ class RFClassifierVars extends Component {
         console.log(this.props)
         return (
         <div id='ml-specific-div'>
-            <form id='ml-specific-form' onSubmit={this.handleSubmit.bind(this)}>
+            <form onSubmit={this.handleSubmit.bind(this)}>
                 <label>
-                Number of Classes &nbsp;&nbsp;&nbsp;&nbsp;
+                Number of Classes 
                 <input id='num_classes' type="number" value={this.state.num_classes} onChange={this.handleChange.bind(this)} />        
                 </label>
                 <br/>
                 <label>
-                Max Tree Depth &nbsp;&nbsp;&nbsp;&nbsp;
-                <input id='tree_depth' type="number" value={this.state.tree_depth} onChange={this.handleChange.bind(this)} />        
+                Hidden Layers 
+                <input id='tree_depth' type="number" value={this.state.hidden_layers} onChange={this.handleChange.bind(this)} />        
+                </label>
+                <br/>
+                <label>
+                Nodes in the hidden layers 
+                <input id='tree_depth' type="number" value={this.state.nodes_hidden_layers} onChange={this.handleChange.bind(this)} />        
                 </label>
                 <br/>
                 <input type="submit" value="Submit" />

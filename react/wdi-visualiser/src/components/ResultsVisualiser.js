@@ -7,6 +7,8 @@ import { showBuilder } from '../actions/displayActions'
 
 import LinearRegressionVisualiser from './visualisers/LinearRegressionVisualiser'
 import RFClassifierVisualiser from './visualisers/RFClassifierVisualiser'
+import NNClassifierVisualiser from './visualisers/NNClassifierVisualiser'
+import RFRegressionVisualiser from './visualisers/RFRegressionVisualiser'
 
 import '../css/ResultsVisualiser.css'
 
@@ -20,6 +22,12 @@ class ResultsVisualiser extends Component {
 
             case 'rf_classifier':
                 return <RFClassifierVisualiser results={this.props.results}/>;
+
+            case 'rf_regression':
+                return <RFRegressionVisualiser results={this.props.results}/>;
+
+            case 'nn_classifier':
+                return <NNClassifierVisualiser results={this.props.results}/>;
 
             default:
                 return <div className="error-div">"There was an error in your ML model. Please build another."</div>;
