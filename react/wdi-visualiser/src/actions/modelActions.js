@@ -23,3 +23,9 @@ export const waitingForML = () => {
         type: "WAITING_FOR_MODEL"
     }
 }
+
+export const mlTypeChange = () => {
+    return {
+        type: "ML_TYPE_CHANGE"
+    }
+}

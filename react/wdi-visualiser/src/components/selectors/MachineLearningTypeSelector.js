@@ -4,12 +4,14 @@ import { connect } from 'react-redux';
 import { Multiselect } from 'multiselect-react-dropdown';
 
 // actions
-import { updateMLParams } from '../../actions/modelActions';
+import { updateMLParams, mlTypeChange } from '../../actions/modelActions';
 
 class MachineLearningTypeSelector extends Component {
 
     updateSelection(selectedItem) {
+        // update the ml type (1st dispatch) then reset ml_specific params (2nd)
         this.props.updateMLParams("ml_type", this.props.ml_types[selectedItem])
+        this.props.mlTypeChange()
     }
 
     render() {    
@@ -38,6 +40,7 @@ const mapStateToProps = (state) => {
   const mapDispatchToProps = (dispatch) => {
     return {
       updateMLParams: (target, value) => dispatch(updateMLParams(target, value)),
+      mlTypeChange: () => dispatch(mlTypeChange())
     }
   }
 

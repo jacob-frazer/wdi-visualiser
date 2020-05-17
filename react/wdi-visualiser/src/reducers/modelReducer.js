@@ -37,6 +37,16 @@ const modelReducer = (state = initialState, action) => {
     case 'WAITING_FOR_MODEL':
         return { ...state, waiting_for_ml: true };
 
+    
+    case 'ML_TYPE_CHANGE':
+        return { 
+            ...state, 
+            ml_params: { 
+                ...state.ml_params, 
+                ml_specific: {}
+            } 
+        };
+
     default:
       return state;
   } 
