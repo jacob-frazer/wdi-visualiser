@@ -6,6 +6,8 @@ import sys
 # import all the various implementations of ML 
 import ml_types.linear_regression as linear_regression
 import ml_types.rf_classifier as rf_classifier
+import ml_types.rf_regression as rf_regression
+import ml_types.nn_classifier as nn_classifier
 
 #print("Hopefully the start of something great :) ")
 
@@ -46,7 +48,9 @@ def run(model_details):
     # point string to the func it corresponds to
     ML_FUNCS_SWITCH = {
         "lin_regression": linear_regression.run,
-        "rf_classifier": rf_classifier.run
+        "rf_classifier": rf_classifier.run,
+        "rf_regression": rf_regression.run,
+        "nn_classifier": nn_classifier.run
     }
 
     # run the machine learning model with the passed in input - val returned an object of the confusion matrix/info about regression etc

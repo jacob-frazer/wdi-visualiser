@@ -12,9 +12,12 @@ def run(ml_input, data):
     # data struct that will be returned to user
     results = {"type":"rf_classifier"}
 
+    # extract the ml specific params
+    params = ml_input["ml_specific"]
+
     # do any ML technique specific data manipulation (classification break into groups for instance)
     # TODO: get ml specific params - how many classifications etc (groups wanted rather than always 3)
-    groups = 3
+    groups = params['num_classes']
 
     # split target into classifications of data
     # make copy - order - split into groups by N_entries/N-groups
@@ -33,7 +36,7 @@ def run(ml_input, data):
     targ_vals = target.values.ravel()
     # perform the ML
     # TODO: Take in params from the user input, trees depth etc etc
-    clf = RandomForestClassifier(max_depth=2, random_state=0)
+    clf = RandomForestClassifier(max_depth=params['tree_depth'], random_state=0)
     clf.fit(df, targ_vals)
 
     # TODO: produce an image -> base64 encode it -> attach to json to display on front end

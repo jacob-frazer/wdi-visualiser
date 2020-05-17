@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 
-
 class ResultsVisualiser extends Component {    
 
     // render the results for Random forest classification - results passed in on props
