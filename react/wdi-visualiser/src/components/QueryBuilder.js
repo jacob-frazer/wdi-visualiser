@@ -14,6 +14,10 @@ import ModelSpecificParamSelector from './selectors/ModelSpecificParamSelector'
 
 import ReactLoading from 'react-loading'
 
+// actions
+import { updateMLParams, updateModel, waitingForML } from '../actions/modelActions';
+import { showResults } from '../actions/displayActions';
+
 class QueryBuilder extends Component {
 
   // for now bind our example to the state
@@ -44,15 +48,20 @@ class QueryBuilder extends Component {
   }
 
   handleClick() {
-    this.setState({"waiting_for_ml":true})
-    axios.post('http://localhost:4000/mlSubmit', this.state.ml_params)
+    // wait for model to train
+    this.props.waitingForML()
+    axios.post('http://localhost:4000/mlSubmit', this.props.ml_params)
     .then( (response) => {
       // updates state with the model we received then calls func passed in from above to update and show visualiser
       this.setState({
         "model_details": response.data,
         "waiting_for_ml": false
       })
-      this.props.updateModel(this.state.model_details)
+      // update state with model
+      this.props.updateModel(response.data)
+      
+      // change display to visualiser
+      this.props.showResults()
     }, (error) => {
         // TODO: set up how to handle errors
       console.log(error);
@@ -89,29 +98,29 @@ class QueryBuilder extends Component {
             <br/>
           </p>
 
-            {Object.keys(this.state.mappings).length ?
+            {this.props.mappings_received ?
             
             <div>
               <div className="heightened-div-1">
               The current model that will be built is: 
               <br/>
-              <MachineLearningTypeSelector ml_types={this.state.mappings.ml_types} submit={this.updateMLParams}/>
+              <MachineLearningTypeSelector/>
               </div>
     
               <div className="heightened-div-2">
-              <DependentVariableSelector indicators={this.state.mappings.indicators} submit={this.updateMLParams}/>
+              <DependentVariableSelector/>
               </div>
               <div className="heightened-div-3">
-              <IndependentVariableSelector indicators={this.state.mappings.indicators} submit={this.updateMLParams}/>
+              <IndependentVariableSelector/>
               </div>
-              <CountrySelector countries={this.state.mappings.countries} submit={this.updateMLParams}/>
+              <CountrySelector/>
               <br/>
-              <YearSelector submit={this.updateMLParams}/>
+              <YearSelector/>
               <br/>
               <ModelSpecificParamSelector type={this.state.ml_params.ml_type} submit={this.updateMLParams}/>
               <br/>
               <p>When you're happy with your variable selections click the button below:</p>
-              { this.state.waiting_for_ml ? 
+              { this.props.waiting_for_ml ? 
               <ReactLoading className="ml-loading" type="bubbles" height={'20%'} width={'20%'} />
               :
               <button className='btn-ml-submit' onClick={this.handleClick.bind(this)}>Generate Machine Learning Model!</button>
@@ -128,4 +137,22 @@ class QueryBuilder extends Component {
   }
 }
 
-export default connect()(QueryBuilder);
+const mapStateToProps = (state) => {
+  return {
+    mappings: state.mappings.mappings,
+    mappings_received: state.mappings.mappings_received,
+    ml_params: state.model.ml_params,
+    waiting_for_ml: state.model.waiting_for_ml
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateMLParams: (target, value) => dispatch(updateMLParams(target, value)),
+    updateModel: (model) => dispatch(updateModel(model)),
+    waitingForML: () => dispatch(waitingForML()),
+    showResults: () => dispatch(showResults())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(QueryBuilder);

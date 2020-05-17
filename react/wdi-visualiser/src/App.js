@@ -13,13 +13,6 @@ import { addMappings, waitingMappings } from './actions/mappingActions';
 
 class App extends Component {
 
-  // for now bind our example to the state
-  state = {
-    mappings_received: false,
-    waiting_for_ml: false,
-    mappings: {}
-  };
-
   // get the data on the countries/variables/yrs etc
   componentDidMount() {
     this.fetchMappings();
@@ -29,50 +22,35 @@ class App extends Component {
     this.props.waitingMappings()
     axios.get('http://localhost:4000/mappings')
     .then( (response) => {
-      let mappings = {
+      // dispatch the action to update mappings into store
+      this.props.addMappings({
         "countries": response.data.countries,
         "indicators": response.data.indicators,
         "ml_types": response.data.mlTypes
-      }
-      this.setState({
-        mappings: {
-          "countries": response.data.countries,
-          "indicators": response.data.indicators,
-          "ml_types": response.data.mlTypes
-        }
       })
-      // dispatch the action to update mappings into store
-      console.log("add mappings to be called:")
-      console.log(mappings)
-      this.props.addMappings(mappings)
-      console.log(this.props)
     })
   }
 
-  updateModel = (model) => {
-    // func that updates the current stored model that can be visualised. (Currently stored in state so 1 at a time)
-    this.setState({
-      model_details: model,
-      model_received: true
-    })
-  }
+  // conditionally render -- change this so we can just tab between them or something?
+  renderSwitch(display) {
+    switch(display) {
+        case 'query':
+            return <QueryBuilder/>;
 
-  resetModel = () => {
-    this.setState({
-      model_received: false
-    })
-  }
+        case 'results':
+            return <ResultsVisualiser/>;
+
+        default:
+            return <div className="error-div">"There was an error displaying this page."</div>;
+    }
+}
 
   render() {
     // runs if the mappings haven't been loaded in yet
     return (
       <div className="App">
         <div className="Background"></div>
-          {this.state.model_received ?
-          <ResultsVisualiser results={this.state.model_details} reset={this.resetModel}/>
-          :
-          <QueryBuilder mappings={this.state.mappings} updateModel={this.updateModel}/>
-          }
+          {this.renderSwitch(this.props.display)}
         <br/>
         <div className='footer-div'>App made by Jake Frazer</div>
         
@@ -84,7 +62,9 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     mappings: state.mappings.mappings,
-    mappings_received: state.mappings.mappings_received
+    mappings_received: state.mappings.mappings_received,
+    model_received: state.model.model_received,
+    display: state.display.display
   }
 }
 

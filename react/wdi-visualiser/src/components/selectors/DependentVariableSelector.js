@@ -1,11 +1,15 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import { connect } from 'react-redux';
 
 import { Multiselect } from 'multiselect-react-dropdown';
+
+// actions
+import { updateMLParams } from '../../actions/modelActions';
 
 class DepVarSelector extends Component {
 
     updateSelection(selectedItem) { 
-        this.props.submit("dep_var", this.props.indicators[selectedItem])
+        this.props.updateMLParams("dep_var", this.props.indicators[selectedItem])
     }
 
     render() {    
@@ -26,4 +30,17 @@ class DepVarSelector extends Component {
     }
 }
 
-export default DepVarSelector;
+const mapStateToProps = (state) => {
+    return {
+      indicators: state.mappings.mappings.indicators
+    }
+  }
+  
+const mapDispatchToProps = (dispatch) => {
+    return {
+      updateMLParams: (target, value) => dispatch(updateMLParams(target, value)),
+    }
+  }
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(DepVarSelector);

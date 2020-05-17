@@ -1,5 +1,10 @@
 import React, {Component} from 'react'
 
+import { connect } from 'react-redux';
+
+// actions (?)
+import { showBuilder } from '../actions/displayActions'
+
 import LinearRegressionVisualiser from './visualisers/LinearRegressionVisualiser'
 import RFClassifierVisualiser from './visualisers/RFClassifierVisualiser'
 
@@ -25,12 +30,27 @@ class ResultsVisualiser extends Component {
     render() {    
         return (
         <div id='main-area'>
-            {this.renderSwitch(this.props.results.type)}
+            {this.renderSwitch(this.props.ml_type)}
             <br/>
-            <button className='btn-ml-back' onClick={this.props.reset}>Take me back!</button>
+            <button className='btn-ml-back' onClick={this.props.showBuilder}>Take me back!</button>
         </div>
         );
     }
 }
 
-export default ResultsVisualiser;
+const mapStateToProps = (state) => {
+    return {
+      results: state.model.results,
+      ml_type: state.model.type
+    }
+  }
+
+// have a dispatch under like miscellaneous -> switch between builder and current results
+const mapDispatchToProps = (dispatch) => {
+    return {
+      showBuilder: () => dispatch(showBuilder())
+    }
+  }
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ResultsVisualiser);
