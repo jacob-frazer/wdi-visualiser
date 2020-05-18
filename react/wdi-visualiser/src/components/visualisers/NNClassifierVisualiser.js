@@ -5,12 +5,7 @@ class ResultsVisualiser extends Component {
 
     // render the results for linear regression - results passed in on props
     render() {   
-        // make the importances list/obj
-        let importances = []
-        for (let i=0; i < this.props.results["feature_importances"][0].length; i++) {
-            importances.push(<div><strong>{this.props.results["feature_importances"][1][i]}</strong>: {this.props.results["feature_importances"][0][i]}</div>)
-        }
-        
+
         return (
         <div id='main-area'>
             <div className='visualiser-header'>You have made a Neural Network Classification Model</div>
@@ -31,12 +26,6 @@ class ResultsVisualiser extends Component {
                         ))}
                     </div>
                     ))}
-                </div>
-                
-                <br/>
-                <div>
-                    The factors have the following importances:
-                    {importances}
                 </div>
 
                 <br/>

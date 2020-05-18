@@ -1,4 +1,4 @@
-from sklearn.ensemble import RandomForestClassifier
+
 from sklearn.metrics import confusion_matrix
 
 import numpy as np
@@ -11,4 +11,5 @@ import matplotlib as plt
 def run(ml_input, data):
     # data struct that will be returned to user
     results = {"type":"rf_regression"}
-    return
+
+    return results
