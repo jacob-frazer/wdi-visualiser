@@ -28,7 +28,7 @@ def run(ml_input, data):
     data = data.sort_values(by=ml_input["dep_var"])
     split_N = math.ceil(len(data)/groups)
 
-    # scale the dataframe - do this before or after making the groupings
+    # scale the dataframe between 0-1 -- do this before making the groupings
     x = data.values
     min_max_scaler = preprocessing.MinMaxScaler()
     x_scaled = min_max_scaler.fit_transform(x)
