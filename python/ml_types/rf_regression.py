@@ -15,7 +15,7 @@ def run(ml_input, data):
     # extract the ml specific params
     params = ml_input["ml_specific"]
 
-    n_estimators = params["num_trees"]              # find this actual name
+    #n_estimators = params["num_trees"]              # find this actual name
 
     # split into df of target values and df of predictive values
     df = pd.DataFrame(data[ml_input["indep_vars"]])

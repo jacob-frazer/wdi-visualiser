@@ -10,6 +10,16 @@ const countries = require('./mappings/countryCodes.json')
 const indicators = require('./mappings/indicatorCodes.json')
 const mlTypes = require('./mappings/ml_types.json')
 
+// set up connection to mongo db
+var MongoClient = require('mongodb').MongoClient;
+const mongoURI = "mongodb://localhost:27017/WDI";
+
+// reference this object throughout the code rather than opening/closing connections repeatedly
+// potentially issues with connect returning a promise?
+const db_client = new MongoClient(mongoURI);
+db_client.connect();
+
+
 // setting up cors to allow cross origin requests etc
 app.use(cors());
 app.use(express.json());
@@ -38,8 +48,15 @@ app.post('/mlSubmit', (req, res) => {
 
     axios.post(url, req.body)
     .then( (response) => {
-        res.send(response.data)
+        data = response.data
+
         // send the response data into mongodb
+        db_client.db().collection("ML_models").insertOne(data, function(err, res) {
+            if (err) throw err;
+            console.log("ML model added to table");
+        });
+
+        res.send(data)
       })
     .catch((error) => {
 
