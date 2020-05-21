@@ -47,14 +47,13 @@ app.post('/mlSubmit', async (req, res) => {
     // Front end will post the ML details to this url - from which it will check database/send to python
 
     // something about non handled promises it doesnt like in here
-    // elements in list match not necessarily same order
     await db_client.db().collection(req.body.ml_type).findOne({
         dep_var: req.body.dep_var,
-        indep_vars: req.body.indep_vars,
-        countries: req.body.countries,
+        indep_vars: {$all: req.body.indep_vars},
+        countries: {$all:req.body.countries},
         start_year: req.body.start_year,
         end_year: req.body.end_year,
-        ml_specific: req.body.ml_specific
+        ml_specific: {$all:req.body.ml_specific}
     }, function(err, results) {
         if (err) throw err;
 
