@@ -17,8 +17,13 @@ const mongoURI = "mongodb://localhost:27017/WDI";
 // reference this object throughout the code rather than opening/closing connections repeatedly
 // potentially issues with connect returning a promise?
 const db_client = new MongoClient(mongoURI);
-db_client.connect();
-
+db_client.connect().then( ret => {
+    // make the collections for each ml type (think table in database)
+    db_client.db().createCollection('rf_regression')
+    db_client.db().createCollection('lin_regression')
+    db_client.db().createCollection('rf_classifier')
+    db_client.db().createCollection('nn_classifier')
+});
 
 // setting up cors to allow cross origin requests etc
 app.use(cors());
@@ -38,10 +43,27 @@ app.get('/mappings', (req, res) => {
     })
 })
 
-app.post('/mlSubmit', (req, res) => {
+app.post('/mlSubmit', async (req, res) => {
     // Front end will post the ML details to this url - from which it will check database/send to python
 
-    // TODO: check params against database and return if it already exists
+    // something about non handled promises it doesnt like in here
+    // elements in list match not necessarily same order
+    await db_client.db().collection(req.body.ml_type).findOne({
+        dep_var: req.body.dep_var,
+        indep_vars: req.body.indep_vars,
+        countries: req.body.countries,
+        start_year: req.body.start_year,
+        end_year: req.body.end_year,
+        ml_specific: req.body.ml_specific
+    }, function(err, results) {
+        if (err) throw err;
+
+        if (results !== null) {
+            console.log("got a result from the database!")
+            res.send(results)
+        }
+    })
+
 
     // redirect the request to the python backend to build the model
     let url = python_url + '/ml'
@@ -49,17 +71,21 @@ app.post('/mlSubmit', (req, res) => {
     axios.post(url, req.body)
     .then( (response) => {
         data = response.data
+        
+        let mongo_data = {
+            ...req.body,
+            ...data
+        }
 
-        // send the response data into mongodb
-        db_client.db().collection("ML_models").insertOne(data, function(err, res) {
+        // send the response data into mongodb -- into collection for specific ml type
+        db_client.db().collection(mongo_data.type).insertOne(mongo_data, function(err, res) {
             if (err) throw err;
-            console.log("ML model added to table");
+            console.log(mongo_data.type + " model added to table");
         });
 
         res.send(data)
       })
     .catch((error) => {
-
         console.error(error)
         console.log("We hit an error see above")
         res.send(error)
