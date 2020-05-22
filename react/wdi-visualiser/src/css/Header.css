@@ -1,0 +1,36 @@
+.Header-component {
+	background-color:#083f4d;
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+
+    padding: 10pt;
+}
+
+.builderDiv { 
+    float:left;  
+    width:33%; 
+    height:20px; 
+    font-size: 18pt;
+    height: 100%;
+    color: rgb(255, 255, 255);
+} 
+
+.resultsDiv { 
+    float:left;  
+    width:33%; 
+    height:20px; 
+    font-size: 18pt;
+    height: 100%;
+    color: rgb(255, 255, 255);
+}
+
+.mlSearchDiv { 
+    float:right; 
+    width:33%; 
+    height:20px; 
+    font-size: 18pt;
+    height: 100%;
+    color: rgb(255, 255, 255);
+} 
+

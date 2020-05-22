@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import { connect } from 'react-redux';
 
+import Header from './components/Header';
 import ResultsVisualiser from './components/ResultsVisualiser';
 import QueryBuilder from './components/QueryBuilder';
 
@@ -49,6 +50,7 @@ class App extends Component {
     // runs if the mappings haven't been loaded in yet
     return (
       <div className="App">
+        <Header/>
         <div className="Background"></div>
           {this.renderSwitch(this.props.display)}
         <br/>

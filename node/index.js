@@ -90,3 +90,9 @@ app.post('/mlSubmit', async (req, res) => {
         res.send(error)
       })
     }) 
+
+
+// listen for searches and return the results
+app.post('/mlSearch', (req, res) => {
+    console.log(req.body)
+})

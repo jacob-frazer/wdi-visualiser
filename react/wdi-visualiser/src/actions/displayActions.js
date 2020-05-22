@@ -5,3 +5,8 @@ export const showBuilder = () => {
 export const showResults = () => {
     return { type: "SHOW_RESULTS" }
 }
+
+export const showModelSearch = () => {
+    return { type: "SHOW_MODEL_SEARCH" }
+}
+

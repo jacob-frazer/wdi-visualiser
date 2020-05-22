@@ -11,6 +11,9 @@ const displayReducer = (state = initialState, action) => {
     case 'SHOW_RESULTS':
         return { ...state, display: 'results' };
 
+    case 'SHOW_MODEL_SEARCH':
+            return { ...state, display: 'modelSearch' };
+
     default:
       return state;
   } 
