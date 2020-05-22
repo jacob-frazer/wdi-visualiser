@@ -1,7 +1,11 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux';
 
 import { Multiselect } from 'multiselect-react-dropdown';
 import Switch from 'react-switch';
+
+// actions
+import { updateMLParams } from '../../actions/modelActions';
 
 class CountrySelector extends Component {
 
@@ -11,15 +15,15 @@ class CountrySelector extends Component {
         let newlist = selectedList.map( item => {
             return this.props.countries[item]
         })
-        this.props.submit("countries", newlist)
+        this.props.updateMLParams("countries", newlist)
     }
 
     handleChangeChk = () => {
         this.setState({checked: !this.state.checked}, () => {
             this.state.checked ? 
-            this.props.submit("countries", Object.values(this.props.countries)) 
+            this.props.updateMLParams("countries", Object.values(this.props.countries)) 
             : 
-            this.props.submit("countries", [])
+            this.props.updateMLParams("countries", [])
             // reset the selection in the component
         })
     }
@@ -43,7 +47,18 @@ class CountrySelector extends Component {
         </div>
         );
     }
-
 }
 
-export default CountrySelector
+const mapStateToProps = (state) => {
+    return {
+        countries: state.mappings.mappings.countries
+    }
+  }
+  
+const mapDispatchToProps = (dispatch) => {
+    return {
+      updateMLParams: (target, value) => dispatch(updateMLParams(target, value)),
+    }
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(CountrySelector);

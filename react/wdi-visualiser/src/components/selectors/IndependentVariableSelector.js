@@ -1,6 +1,10 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux';
 
 import { Multiselect } from 'multiselect-react-dropdown';
+
+// actions
+import { updateMLParams } from '../../actions/modelActions';
 
 class IndepVarSelector extends Component {
 
@@ -8,7 +12,7 @@ class IndepVarSelector extends Component {
         let newlist = selectedList.map( item => {
             return this.props.indicators[item]
         })
-        this.props.submit("indep_vars", newlist)
+        this.props.updateMLParams("indep_vars", newlist)
     }
 
     render() {    
@@ -27,7 +31,18 @@ class IndepVarSelector extends Component {
         </div>
         );
     }
-
 }
 
-export default IndepVarSelector
+const mapStateToProps = (state) => {
+    return {
+      indicators: state.mappings.mappings.indicators
+    }
+  }
+  
+const mapDispatchToProps = (dispatch) => {
+    return {
+      updateMLParams: (target, value) => dispatch(updateMLParams(target, value)),
+    }
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(IndepVarSelector);

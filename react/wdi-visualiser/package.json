@@ -11,8 +11,11 @@
     "react": "^16.13.1",
     "react-compound-slider": "^2.5.0",
     "react-dom": "^16.13.1",
+    "react-loading": "^2.0.3",
+    "react-redux": "^7.2.0",
     "react-scripts": "3.4.1",
-    "react-switch": "^5.0.1"
+    "react-switch": "^5.0.1",
+    "redux": "^4.0.5"
   },
   "scripts": {
     "start": "set PORT=2000 && react-scripts start",

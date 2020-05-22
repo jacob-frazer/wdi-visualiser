@@ -1,6 +1,11 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux';
+
+// actions
+import { updateMLParams } from '../../actions/modelActions';
 
 import { Slider, Rail, Handles, Tracks, Ticks } from 'react-compound-slider'
+
 const sliderStyle = {  // Give the slider some width
     position: 'relative',
     width: '100%',
@@ -100,8 +105,8 @@ function Tick({ tick, count }) {
 class YearSelector extends Component {
 
     onChange = years => {
-        this.props.submit("start_year", years[0])
-        this.props.submit("end_year", years[1])
+        this.props.updateMLParams("start_year", years[0])
+        this.props.updateMLParams("end_year", years[1])
     }
 
     render() {    
@@ -165,4 +170,18 @@ class YearSelector extends Component {
 
 }
 
-export default YearSelector
+// dont think we actually need this at all
+const mapStateToProps = (state) => {
+  return {
+    years: [1960,2020]
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateMLParams: (target, value) => dispatch(updateMLParams(target, value)),
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(YearSelector);
