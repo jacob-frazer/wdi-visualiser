@@ -93,16 +93,13 @@ app.post('/mlSubmit', async (req, res) => {
 
 // listen for searches and return the results
 app.post('/mlSearch', async (req, res) => {
-    console.log(req.body)
 
     await db_client.db().collection(req.body.ml_type).find({
         dep_var: req.body.dep_var
     }).limit(10).toArray( function(err, result) {
         if (err) throw err;
 
-        console.log("The results we found are:")
         // send results back
-        console.log(result);
         res.send(result)
     })
 })

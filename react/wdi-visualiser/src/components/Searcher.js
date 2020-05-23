@@ -28,6 +28,19 @@ class Searcher extends Component {
         Yo this is the searcher!  <br/>
         Select a model from your search and then go to the results tab to view it more closely.
         <br/>
+        <br/>
+
+        {/* 
+        Map over the search results and make each a cute little div -- put 3 to a line or something?
+        Make this into its own mini component to display the boxes nicely?
+        */}
+        <div>
+            {this.props.search_results.map((model) => (
+                <div className='search-model' onClick={() => this.handleClick(model)}>
+                    Model with id: {model._id}. R^2 of: {model['R Squared']}
+                </div>
+            ))}
+        </div>
         
       </div>
     )
