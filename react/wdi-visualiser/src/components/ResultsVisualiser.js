@@ -30,7 +30,7 @@ class ResultsVisualiser extends Component {
                 return <NNClassifierVisualiser results={this.props.results}/>;
 
             default:
-                return <div className="error-div">"There was an error in your ML model. Please build another."</div>;
+                return <div className="error-div">You currently have no ML model selected. Either build or search for one!</div>;
         }
     }
 
@@ -38,6 +38,7 @@ class ResultsVisualiser extends Component {
     render() {    
         return (
         <div id='main-area'>
+            <div className='header-space'/>
             {this.renderSwitch(this.props.ml_type)}
             <br/>
             <button className='btn-ml-back' onClick={this.props.showBuilder}>Take me back!</button>

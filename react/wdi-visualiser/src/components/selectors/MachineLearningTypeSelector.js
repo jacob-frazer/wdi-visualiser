@@ -17,6 +17,8 @@ class MachineLearningTypeSelector extends Component {
     render() {    
         return (
         <div id='main-area'>
+            The current model type is: 
+            <br/>
             <Multiselect
             options={Object.keys(this.props.ml_types)}
             onSelect={this.updateSelection.bind(this)}

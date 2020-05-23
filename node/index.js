@@ -53,7 +53,7 @@ app.post('/mlSubmit', async (req, res) => {
         countries: {$all:req.body.countries},
         start_year: req.body.start_year,
         end_year: req.body.end_year,
-        ml_specific: {$all:req.body.ml_specific}
+        ml_specific: req.body.ml_specific
     }, function(err, results) {
         if (err) throw err;
 
@@ -62,7 +62,6 @@ app.post('/mlSubmit', async (req, res) => {
             res.send(results)
         }
     })
-
 
     // redirect the request to the python backend to build the model
     let url = python_url + '/ml'
@@ -79,7 +78,7 @@ app.post('/mlSubmit', async (req, res) => {
         // send the response data into mongodb -- into collection for specific ml type
         db_client.db().collection(mongo_data.type).insertOne(mongo_data, function(err, res) {
             if (err) throw err;
-            console.log(mongo_data.type + " model added to table");
+            console.log(mongo_data.type + " model added to collection");
         });
 
         res.send(data)
@@ -93,6 +92,17 @@ app.post('/mlSubmit', async (req, res) => {
 
 
 // listen for searches and return the results
-app.post('/mlSearch', (req, res) => {
+app.post('/mlSearch', async (req, res) => {
     console.log(req.body)
+
+    await db_client.db().collection(req.body.ml_type).find({
+        dep_var: req.body.dep_var
+    }).limit(10).toArray( function(err, result) {
+        if (err) throw err;
+
+        console.log("The results we found are:")
+        // send results back
+        console.log(result);
+        res.send(result)
+    })
 })

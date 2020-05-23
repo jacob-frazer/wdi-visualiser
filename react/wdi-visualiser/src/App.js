@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './css/App.css';
 
 import axios from 'axios';
 
@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import Header from './components/Header';
 import ResultsVisualiser from './components/ResultsVisualiser';
 import QueryBuilder from './components/QueryBuilder';
+import Searcher from './components/Searcher';
 
 // actions
 import { addMappings, waitingMappings } from './actions/mappingActions';
@@ -40,6 +41,9 @@ class App extends Component {
 
         case 'results':
             return <ResultsVisualiser/>;
+
+        case 'modelSearch':
+            return <Searcher/>;
 
         default:
             return <div className="error-div">"There was an error displaying this page."</div>;

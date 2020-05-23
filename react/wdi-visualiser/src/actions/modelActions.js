@@ -24,6 +24,12 @@ export const waitingForML = () => {
     }
 }
 
+export const notWaiting = () => {
+    return {
+        type: "NOT_WAITING"
+    }
+}
+
 export const mlTypeChange = () => {
     return {
         type: "ML_TYPE_CHANGE"

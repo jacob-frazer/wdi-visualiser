@@ -3,8 +3,6 @@
     position: fixed;
     z-index: 100;
     width: 100%;
-
-    padding: 10pt;
 }
 
 .builderDiv { 
@@ -13,6 +11,14 @@
     height:20px; 
     font-size: 18pt;
     height: 100%;
+    color: rgb(255, 255, 255);
+    padding-top: 2pt;
+    padding-bottom: 2pt;
+    cursor: pointer;
+} 
+
+.builderDiv:hover { 
+    background-color: darkmagenta;
     color: rgb(255, 255, 255);
 } 
 
@@ -23,7 +29,15 @@
     font-size: 18pt;
     height: 100%;
     color: rgb(255, 255, 255);
+    padding-top: 2pt;
+    padding-bottom: 2pt;
+    cursor: pointer;
 }
+
+.resultsDiv:hover { 
+    background-color: darkmagenta;
+    color: rgb(255, 255, 255);
+} 
 
 .mlSearchDiv { 
     float:right; 
@@ -31,6 +45,14 @@
     height:20px; 
     font-size: 18pt;
     height: 100%;
+    color: rgb(255, 255, 255);
+    padding-top: 2pt;
+    padding-bottom: 2pt;
+    cursor: pointer;
+} 
+
+.mlSearchDiv:hover { 
+    background-color: darkmagenta;
     color: rgb(255, 255, 255);
 } 
 

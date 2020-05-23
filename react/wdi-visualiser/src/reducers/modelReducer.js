@@ -30,13 +30,14 @@ const modelReducer = (state = initialState, action) => {
             ...state, 
             results: action.payload.results, 
             type: action.payload.type, 
-            waiting_for_ml: false, 
             model_received: true 
         };
 
     case 'WAITING_FOR_MODEL':
         return { ...state, waiting_for_ml: true };
 
+    case 'NOT_WAITING':
+        return { ...state, waiting_for_ml: false };
     
     case 'ML_TYPE_CHANGE':
         return { 

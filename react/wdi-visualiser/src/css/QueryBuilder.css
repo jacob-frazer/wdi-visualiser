@@ -1,0 +1,105 @@
+#multiselectContainerReact {
+    color: rgb(0, 0, 0);
+    font-size: 12px;
+    width: 80%;
+    margin: auto;
+    z-index: 3;
+  }
+  
+.heightened-div-1 {
+position: relative;
+z-index: 6;
+}
+
+.heightened-div-2 {
+position: relative;
+z-index: 5;
+}
+
+.heightened-div-3 {
+position: relative;
+z-index: 4;
+}
+
+.btn-ml-submit {
+    background-color:#44c767;
+    border-radius:28px;
+    border:1px solid #18ab29;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:17px;
+    padding:16px 31px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #2f6627;
+}
+.btn-ml-submit:hover {
+background-color:#184402;
+border:1px solid #18ab29;
+}
+.btn-ml-submit:active {
+    position:relative;
+    top:1px;
+}
+
+.btn-ml-search-submit {
+    background-color:#c74444;
+    border-radius:28px;
+    border:1px solid #ab1818;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:17px;
+    padding:16px 31px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #2f6627;
+}
+.btn-ml-search-submit:hover {
+background-color:#440202;
+border:1px solid #ab1818;
+}
+.btn-ml-search-submit:active {
+    position:relative;
+    top:1px;
+}
+
+.searchBox {
+color: #000;
+}
+
+
+.CountrySelect {
+max-width: 400; 
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+align-items: center;
+justify-content: center;
+text-align: center;
+}
+
+.ml-loading {
+display:inline-block;
+}
+
+.ml-specific-div {
+font-size: 12pt;
+}
+
+label {
+font-size: 12pt;
+}
+
+.error-div {
+font-size: 12pt;
+}
+
+.header-space-builder {
+	background-color:#083f4d00;
+    z-index: 0;
+    width: 100%;
+	padding-top: 15pt;
+	height: 10pt;
+}
