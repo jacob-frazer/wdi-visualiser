@@ -10,6 +10,11 @@ const countries = require('./mappings/countryCodes.json')
 const indicators = require('./mappings/indicatorCodes.json')
 const mlTypes = require('./mappings/ml_types.json')
 
+// reversed mappings
+const revCountries = require('./mappings/countryCodes_reversed.json')
+const revIndicators = require('./mappings/indicatorCodes_reversed.json')
+const revMLTypes = require('./mappings/ml_types_reversed.json')
+
 // set up connection to mongo db
 var MongoClient = require('mongodb').MongoClient;
 const mongoURI = "mongodb://localhost:27017/WDI";
@@ -40,6 +45,15 @@ app.get('/mappings', (req, res) => {
         countries,
         indicators,
         mlTypes
+    })
+})
+
+app.get('/revMappings', (req, res) => {
+    // send the mappings to the web app
+    res.send({
+        revCountries,
+        revIndicators,
+        revMLTypes
     })
 })
 

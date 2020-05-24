@@ -1,0 +1,6 @@
+{
+    "lin_regression": "Linear Regression",
+    "rf_regression": "Random Forest Regression",
+    "nn_classifier": "Neural Network Classifier",
+    "rf_classifier": "Random Forest Classifier"
+}

@@ -50,8 +50,6 @@ class QueryBuilder extends Component {
     axios.post('http://localhost:4000/mlSearch', this.props.ml_params)
     .then( (response) => {
       // update state with models
-      console.log("Handle search click response and we have: ")
-      console.log(response.data)
       this.props.updateSearchResults(response.data)
       this.props.notWaiting();
 

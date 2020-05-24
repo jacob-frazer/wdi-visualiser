@@ -11,7 +11,7 @@ import QueryBuilder from './components/QueryBuilder';
 import Searcher from './components/Searcher';
 
 // actions
-import { addMappings, waitingMappings } from './actions/mappingActions';
+import { addMappings, addRevMappings, waitingMappings, receivedMappings } from './actions/mappingActions';
 
 class App extends Component {
 
@@ -30,6 +30,19 @@ class App extends Component {
         "indicators": response.data.indicators,
         "ml_types": response.data.mlTypes
       })
+    })
+
+    axios.get('http://localhost:4000/revMappings')
+    .then( (response) => {
+      // dispatch the action to update mappings into store
+      this.props.addRevMappings({
+        "countries": response.data.revCountries,
+        "indicators": response.data.revIndicators,
+        "ml_types": response.data.revMLTypes
+      })
+    })
+    .then( () => {
+      this.props.receivedMappings()
     })
   }
 
@@ -77,7 +90,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addMappings: (mappings) => dispatch(addMappings(mappings)),
-    waitingMappings: () => dispatch(waitingMappings())
+    addRevMappings: (mappings) => dispatch(addRevMappings(mappings)),
+    waitingMappings: () => dispatch(waitingMappings()),
+    receivedMappings: () => dispatch(receivedMappings())
   }
 }
 

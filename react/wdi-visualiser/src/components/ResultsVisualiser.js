@@ -41,7 +41,6 @@ class ResultsVisualiser extends Component {
             <div className='header-space'/>
             {this.renderSwitch(this.props.ml_type)}
             <br/>
-            <button className='btn-ml-back' onClick={this.props.showBuilder}>Take me back!</button>
         </div>
         );
     }
