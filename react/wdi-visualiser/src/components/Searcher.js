@@ -49,7 +49,7 @@ class Searcher extends Component {
 
         <br/>
         <br/>
-        Select a model from your search and then go to the results tab to view it more closely.
+        Select a model from your search to view it more closely!
         <br/>
         <br/>
 
