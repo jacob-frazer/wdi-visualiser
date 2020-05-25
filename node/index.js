@@ -95,7 +95,7 @@ app.post('/mlSubmit', async (req, res) => {
             console.log(mongo_data.type + " model added to collection");
         });
 
-        res.send(data)
+        res.send(mongo_data)
       })
     .catch((error) => {
         console.error(error)
@@ -105,12 +105,39 @@ app.post('/mlSubmit', async (req, res) => {
     }) 
 
 
+function clean(obj) {
+    // cleans the query objects to make sure they only have keys with querys in
+    // then adds in special $all tags to indep_vars and countries if they're still here
+    let propNames = Object.getOwnPropertyNames(obj);
+    for (let i = 0; i < propNames.length; i++) {
+        let propName = propNames[i];
+        if (obj[propName] == null || obj[propName] == undefined || obj[propName].length === 0 ) {
+        delete obj[propName];
+        }
+    }
+    // delete ML specific if its empty
+    if (Object.keys(obj['ml_specific']).length === 0) delete obj['ml_specific']
+
+    // special cases
+    if (obj.indep_vars !== undefined) {
+        obj.indep_vars = {$all: obj.indep_vars}
+    }
+
+    if (obj.countries !== undefined) {
+        obj.countries = {$all: obj.countries}
+    }
+    }
+
 // listen for searches and return the results
 app.post('/mlSearch', async (req, res) => {
 
-    await db_client.db().collection(req.body.ml_type).find({
-        dep_var: req.body.dep_var
-    }).limit(10).toArray( function(err, result) {
+    // weed out null/blank fields and search on whats left
+    let query = req.body
+    clean(query)
+
+    await db_client.db().collection(req.body.ml_type).find(
+        query
+    ).limit(10).toArray( function(err, result) {
         if (err) throw err;
 
         // send results back

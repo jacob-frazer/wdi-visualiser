@@ -44,8 +44,8 @@ class Searcher extends Component {
         <div className='header-space'/>
         
         These are the search results for:  <br/>
-        ML Type: {this.props.ml_mappings[this.props.query.ml_type]},
-        Dependent Variable: {this.props.indicator_mappings[this.props.query.dep_var]}
+        ML Type: <strong>{this.props.ml_mappings[this.props.query.ml_type]}</strong>, 
+        Dependent Variable: <strong>{this.props.indicator_mappings[this.props.query.dep_var]}</strong>
 
         <br/>
         <br/>

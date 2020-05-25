@@ -29,12 +29,12 @@ class RFClassifierVars extends Component {
         <div id='ml-specific-div'>
             <form onSubmit={this.handleSubmit.bind(this)}>
                 <label>
-                Number of Trees 
+                Number of Trees &nbsp;&nbsp;&nbsp;&nbsp;
                 <input id='num_classes' type="number" value={this.state.num_trees} onChange={this.handleChange.bind(this)} />        
                 </label>
                 <br/>
                 <label>
-                Max Tree Depth 
+                Max Tree Depth &nbsp;&nbsp;&nbsp;&nbsp;
                 <input id='tree_depth' type="number" value={this.state.tree_depth} onChange={this.handleChange.bind(this)} />        
                 </label>
                 <br/>

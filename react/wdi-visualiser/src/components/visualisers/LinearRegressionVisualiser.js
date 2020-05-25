@@ -6,8 +6,6 @@ class ResultsVisualiser extends Component {
 
     // render the results for linear regression - results passed in on props
     render() {    
-        console.log("the props we have in results visualiser are:")
-        console.log(this.props)
         return (
         <div id='main-area'>
             <div className='visualiser-header'><h2>Linear Regression Model</h2></div>
@@ -26,9 +24,9 @@ class ResultsVisualiser extends Component {
 
             <div className='all-results-div'>
                 <h2>Results</h2>
-                {/* Make the two types of results divs go side by side */}
                 <div className='numeric-results-div'>
-                The R squared value of the model is {this.props.results["R Squared"]} .
+                <div>The R squared value of the model is {this.props.results["R Squared"]} . </div>
+                {/* Add in more results here to make the exploration better */}
                 </div>
                 <br/>
 
@@ -55,6 +53,14 @@ class ResultsVisualiser extends Component {
                 <div className='years-div'>
                     <h3>Other details</h3>
                     <div>The data was sampled between the years of {this.props.results.start_year} and {this.props.results.end_year}.</div>
+                    <br/><br/>
+                    <div>
+                        The model was built with the following non default parameters: <br/>
+                        -- Linear Regression has no params to specify --
+                        {Object.entries(this.props.results.ml_specific).map(([param, value]) => {
+                            return <div>{param}: &nbsp; {value}</div>
+                        })}
+                    </div>
                 </div>
             </div>
 
