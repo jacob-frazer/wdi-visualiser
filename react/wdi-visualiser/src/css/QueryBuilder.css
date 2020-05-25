@@ -103,3 +103,21 @@ font-size: 12pt;
 	padding-top: 15pt;
 	height: 10pt;
 }
+
+input[type=submit] {
+    background-color:#4488c7;
+    border-radius:10px;
+    border:1px solid #2218ab;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:16px;
+    padding:16px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #332766;
+}
+
+input[type=submit]:hover {
+    background-color:#4451c7;
+}

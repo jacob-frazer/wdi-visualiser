@@ -38,7 +38,8 @@ class RFClassifierVars extends Component {
                 <input id='tree_depth' type="number" value={this.state.tree_depth} onChange={this.handleChange.bind(this)} />        
                 </label>
                 <br/>
-                <input type="submit" value="Submit" />
+                <br/>
+                <input className='ml-specific-submit' type="submit" value="Lock in values" />
             </form>
             <br/>
         </div>
