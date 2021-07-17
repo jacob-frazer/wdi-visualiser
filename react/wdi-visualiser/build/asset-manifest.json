@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e08610ba.chunk.css",
+    "main.js": "/static/js/main.e6127439.chunk.js",
+    "main.js.map": "/static/js/main.e6127439.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.1e0f61c5.js",
+    "runtime-main.js.map": "/static/js/runtime-main.1e0f61c5.js.map",
+    "static/js/2.1358adeb.chunk.js": "/static/js/2.1358adeb.chunk.js",
+    "static/js/2.1358adeb.chunk.js.map": "/static/js/2.1358adeb.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.555377191d5f79d776f70e7f9d86a7d4.js": "/precache-manifest.555377191d5f79d776f70e7f9d86a7d4.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.e08610ba.chunk.css.map": "/static/css/main.e08610ba.chunk.css.map",
+    "static/js/2.1358adeb.chunk.js.LICENSE.txt": "/static/js/2.1358adeb.chunk.js.LICENSE.txt",
+    "static/media/world_bank.png": "/static/media/world_bank.a6d703ac.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1e0f61c5.js",
+    "static/js/2.1358adeb.chunk.js",
+    "static/css/main.e08610ba.chunk.css",
+    "static/js/main.e6127439.chunk.js"
+  ]
+}
