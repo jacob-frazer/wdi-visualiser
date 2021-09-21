@@ -30,7 +30,8 @@ class QueryBuilder extends Component {
   handleBuildClick() {
     // wait for model to train
     this.props.waitingForML()
-    axios.post('http://localhost:4000/mlSubmit', this.props.ml_params)
+    //axios.post('http://localhost:4000/mlSubmit', this.props.ml_params)
+    axios.post('http://3.139.91.88:4000/mlSubmit', this.props.ml_params)
     .then( (response) => {
       // update state with model
       this.props.updateModel(response.data)
@@ -47,7 +48,7 @@ class QueryBuilder extends Component {
   handleSearchClick = () => {
     // wait for model to train
     this.props.waitingForML();
-    axios.post('http://localhost:4000/mlSearch', this.props.ml_params)
+    axios.post('http://3.139.91.88:4000/mlSearch', this.props.ml_params)
     .then( (response) => {
       // update state with models
       this.props.updateSearchResults(response.data)

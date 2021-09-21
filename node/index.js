@@ -3,7 +3,8 @@ const app = express();
 const cors = require('cors');
 
 const axios = require('axios')
-const python_url = 'http://localhost:5000'
+//const python_url = 'http://localhost:5000'
+const python_url = 'http://127.0.0.1:5000'
 
 // the mappings of countries and indicators etc
 const countries = require('./mappings/countryCodes.json')
@@ -17,7 +18,8 @@ const revMLTypes = require('./mappings/ml_types_reversed.json')
 
 // set up connection to mongo db
 var MongoClient = require('mongodb').MongoClient;
-const mongoURI = "mongodb://localhost:27017/WDI";
+//const mongoURI = "mongodb://localhost:27017/WDI";
+const mongoURI = "mongodb://127.0.0.1:27017/WDI";
 
 // reference this object throughout the code rather than opening/closing connections repeatedly
 // potentially issues with connect returning a promise?
@@ -71,9 +73,11 @@ app.post('/mlSubmit', async (req, res) => {
     }, function(err, results) {
         if (err) throw err;
 
-        if (results !== null) {
+        if (results !== null && results !== undefined) {
+	    console.log(" ")
             console.log("got a result from the database!")
-            res.send(results)
+	    console.log(results)
+            return res.send(results)
         }
     })
 
@@ -95,7 +99,8 @@ app.post('/mlSubmit', async (req, res) => {
             console.log(mongo_data.type + " model added to collection");
         });
 
-        res.send(mongo_data)
+	console.log(" ")
+        return res.send(mongo_data)
       })
     .catch((error) => {
         console.error(error)

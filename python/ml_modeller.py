@@ -17,6 +17,7 @@ import ml_types.nn_classifier as nn_classifier
 
 # local dataset location
 data_path = r"C:\Programming\ml_data\world_development\WDIData.csv"
+data_path = "./../../WDIData.csv"
 
 # get data into pandas df
 data_df = pd.read_csv(data_path, header=0)

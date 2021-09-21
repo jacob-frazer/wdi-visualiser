@@ -22,7 +22,8 @@ class App extends Component {
 
   fetchMappings() {
     this.props.waitingMappings()
-    axios.get('http://localhost:4000/mappings')
+    //axios.get('http://localhost:4000/mappings')
+    axios.get('http://3.139.91.88:4000/mappings')
     .then( (response) => {
       // dispatch the action to update mappings into store
       this.props.addMappings({
@@ -32,7 +33,8 @@ class App extends Component {
       })
     })
 
-    axios.get('http://localhost:4000/revMappings')
+    //axios.get('http://localhost:4000/revMappings')
+    axios.get('http://3.139.91.88:4000/revMappings')
     .then( (response) => {
       // dispatch the action to update mappings into store
       this.props.addRevMappings({
